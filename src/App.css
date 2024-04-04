@@ -1,38 +1,128 @@
-.App {
-  text-align: center;
+body{
+    text-align: center;
+    margin: 0%;
+    padding: 0%;
+    background-color: #ebe0d1;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.heading{
+    background-color: #948473;
+    font-weight: bold;
+    color: #ffff;
+    flex: 5%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.add-todo{
+    flex: 15%;
+    background-color: #beab8f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border-bottom: 3px dashed #fff;
+    border-top: 3px dashed #fff;
 }
 
-.App-link {
-  color: #61dafb;
+
+.input-class{
+    display: flex;
+    flex-direction: row;
+    text-align: start;
+    justify-content: center;
+    width: 100%;
+    padding: 0 150px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.title {
+    width: 30%;
+    display: flex;
+    align-items: center;
 }
+
+.title input {
+    border-radius: 7px;
+    border: 1px solid grey;
+    word-wrap: break-word;
+    margin: 0 15px;
+    height: 25px;
+    width: 80%;
+}
+
+.description{
+    width: 70%;
+    display: flex;
+    align-items: center;
+    word-wrap: break-word;
+}
+
+.description label{
+    text-align: start;
+    justify-content: center;
+}
+
+.description textarea{
+    height: 80%;
+    width: 70%;
+    resize: none;
+    border-radius: 7px;
+    word-wrap: break-word;
+    margin: 0 15px;
+}
+
+#add {
+    background: #b5a28e;
+    border: 1px solid black;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #000000;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    min-height: 30px;
+    outline: 0;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+}
+
+#add:hover,
+#add:active {
+    background-color: #948473;
+    background-position: 0 0;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+#add:active {
+    opacity: .5;
+}
+
+
+
+.todo-list {
+    flex: 80%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-y: auto;
+    margin: 15px 0;
+    word-wrap: break-word;
+}
+
+

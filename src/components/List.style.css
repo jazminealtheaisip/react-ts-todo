@@ -1,0 +1,75 @@
+.todo-container{
+    width: 80%;
+    
+    display: flex;
+    color: black;
+    margin: 3px;
+
+}
+
+.todo-container .todo-each {
+    flex: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.todo-container .todo-each span {
+    display: flex;
+    align-items: center;
+    border: 1px solid white;
+    padding: 5px;
+    font-size: 16px;
+    border-right: none;
+    background-color: #beab8f;
+    word-wrap: break-word;
+}
+#checkbox{
+    width: 5%;
+}
+
+#span-short{
+    width: 15%;
+}
+#span-mid-long {
+    width: 30%;
+}
+#span-long {
+    width: 50%;
+}
+
+.buttons {
+    flex: 20%;
+    border: 1px solid #fff;
+    background-color: #948473;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#edit-button{
+    color: #fff;
+    background-color: transparent;
+    border: none;
+}
+
+#delete-button {
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+    background-color: transparent;
+    color: #fff;
+}
+
+#delete-button:hover {
+    background: #865353;
+}
+
+#delete-button:focus {
+    outline: none;
+}
