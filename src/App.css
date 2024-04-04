@@ -38,6 +38,7 @@ body{
     justify-content: center;
     width: 100%;
     padding: 0 150px;
+    word-wrap: break-word;
 }
 
 .title {
