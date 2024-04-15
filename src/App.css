@@ -41,7 +41,7 @@ body {
   flex-direction: row;
   text-align: start;
   word-break: break-word;
-  background-color: white;
+  /*  background-color: white; */
 }
 
 .title {
@@ -56,7 +56,7 @@ body {
   word-break: break-word;
   margin: 0 15px;
   height: 25px;
-  width: 70%;
+  width: 75%;
 }
 
 .categories-options {
@@ -64,7 +64,7 @@ body {
   width: 20%;
   text-align: center;
   align-items: center;
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
 }
 
 #options-input {
@@ -72,14 +72,14 @@ body {
   padding: 6px;
   background-color: #948473;
   border-color: transparent;
-  width: 60%;
+  width: 75%;
 }
 
 .description {
   width: 20%;
   display: flex;
   word-break: break-word;
-  background-color: #000000;
+  /* background-color: #000000; */
 }
 
 /* .description label {

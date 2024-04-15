@@ -8,7 +8,7 @@ const App: FC = () => {
   const [title, setTitle] = useState<string>("");
   /* const [description, setDescription] = useState<string>(""); */
   const [todoList, setTodoList] = useState<Data[]>([]);
-  const todosLength = todoList.length;
+  /* const todosLength = todoList.length; */
   const [filterOption, setFilterOption] = useState<string>("all");
 
   const [category, setCategory] = useState<string>("");

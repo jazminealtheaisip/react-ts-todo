@@ -16,11 +16,10 @@ const List = ({
   title,
   onDelete,
   onToggleCompleted,
-  category,
   onEditTitle,
 }: TodoInterface) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [editedTitle, setEditedTitle] = useState<string>(title.title);
+  const [editedTitle, setEditedTitle] = useState<string>("");
 
   const handleDelete = (): void => {
     onDelete(title.id);
@@ -35,10 +34,14 @@ const List = ({
     setIsEditing(false);
   };
 
+  const checkIfEditing = (): void => {
+    setIsEditing(true);
+    setEditedTitle(title.title);
+  };
+
   return (
     <div className="todo-container">
       <div className="todo-each">
-        <span id="category">{title.category}</span>
         <span id="checkbox">
           <input
             type="checkbox"
@@ -54,7 +57,7 @@ const List = ({
         >
           {title.isCompleted ? "Completed" : "Pending"}
         </span>
-
+        <span id="category">{title.category}</span>
         {isEditing ? (
           <>
             <input
@@ -65,8 +68,8 @@ const List = ({
               onBlur={handleEdit}
               autoFocus
             />
-            <button onClick={handleEdit}>✓</button>
-            <button onClick={() => setIsEditing(false)}>✗</button>
+            {/* <button onClick={handleEdit}>✓</button>
+            <button onClick={() => setIsEditing(false)}>✗</button> */}
           </>
         ) : (
           <span id="span-mid-long">{title.title}</span>
@@ -76,7 +79,7 @@ const List = ({
       </div>
 
       <div className="buttons">
-        <FaEdit id="edit-button" onClick={() => setIsEditing(true)} />
+        <FaEdit id="edit-button" onClick={checkIfEditing} />
         |
         <FaDeleteLeft
           id="delete-button"
