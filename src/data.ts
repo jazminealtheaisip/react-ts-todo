@@ -1,8 +1,8 @@
 export interface Data {
   id: string;
   title: string;
-  description: string;
+  /* description: string; */
   isCompleted: boolean;
   createdAtDate: string;
-  createdAtTime: string;
+  category: string;
 }

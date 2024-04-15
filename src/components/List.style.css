@@ -1,80 +1,100 @@
-.todo-container{
-    width: 80%;
-    
-    display: flex;
-    color: black;
-    margin: 3px;
+.todo-container {
+  width: 70%;
 
+  display: flex;
+  color: black;
+  margin: 4px;
 }
 
 .todo-container .todo-each {
-    flex: 85%;
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
+  flex: 90%;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
 }
 
 .todo-container .todo-each span {
-    display: flex;
-    align-items: center;
-    border: 1px solid white;
-    padding: 5px;
-    font-size: 16px;
-    border-right: none;
-    background-color: #beab8f;
-    word-wrap: break-word;
-    text-align: start;
+  display: flex;
+  align-items: center;
+  border: 1px solid white;
+  padding: 10px;
+  font-size: 16px;
+  border-right: none;
+  background-color: #beab8f;
+  word-wrap: break-word;
+  text-align: start;
 }
 
-#checkbox{
-    width: 5%;
-    display: flex;
-    justify-content: center;
+#category {
+  width: 5%;
 }
 
-#span-short{
-    width: 15%;
+#checkbox {
+  width: 2%;
+  display: flex;
+  justify-content: center;
+}
+
+#status {
+  width: 8%;
+  display: flex;
+  justify-content: start;
+}
+
+#span-short {
+  width: 20%;
 }
 #span-mid-long {
-    width: 30%;
+  width: 65%;
 }
-#span-long {
-    width: 50%;
-    word-wrap: break-word;
-}
+/* #span-long {
+  width: 50%;
+  word-wrap: break-word;
+} */
 
 .buttons {
-    flex: 15%;
-    border: 1px solid #fff;
-    background-color: #948473;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  flex: 10%;
+  border: 1px solid #fff;
+  background-color: #948473;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#edit-button{
-    color: #fff;
-    background-color: transparent;
-    border: none;
+#edit-button {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  background-color: transparent;
+  color: #fff;
+}
+
+#edit-button:hover {
+  background: #484f81;
+}
+
+#edit-button:focus {
+  outline: none;
 }
 
 #delete-button {
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
-    background-color: transparent;
-    color: #fff;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  background-color: transparent;
+  color: #fff;
 }
 
 #delete-button:hover {
-    background: #865353;
+  background: #865353;
 }
 
 #delete-button:focus {
-    outline: none;
+  outline: none;
 }
