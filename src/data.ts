@@ -4,5 +4,5 @@ export interface Data {
   /* description: string; */
   isCompleted: boolean;
   createdAtDate: string;
-  category: string;
+  /* category: string; */
 }

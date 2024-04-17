@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import "./List.style.css";
 import { Data } from "../data";
-import { FaDeleteLeft } from "react-icons/fa6";
 import { FaEdit } from "react-icons/fa";
+import { MdPendingActions } from "react-icons/md";
+import { HiOutlineClipboardCheck } from "react-icons/hi";
+import { MdDeleteForever } from "react-icons/md";
 
 interface TodoInterface {
   title: Data;
   onDelete: (id: string) => void;
   onToggleCompleted: (id: string) => void;
-  category: string;
   onEditTitle: (id: string, newTitle: string) => void;
 }
 
@@ -41,9 +42,16 @@ const List = ({
 
   return (
     <div className="todo-container">
+      <div className="side-list"></div>
       <div className="todo-each">
-        <span id="checkbox">
+        <span
+          id="checkbox"
+          style={{
+            backgroundColor: title.isCompleted ? "#c4dea4" : "#beab8f",
+          }}
+        >
           <input
+            id="checkbox-design"
             type="checkbox"
             checked={title.isCompleted}
             onChange={handleToggleCompleted}
@@ -55,9 +63,13 @@ const List = ({
             backgroundColor: title.isCompleted ? "#c4dea4" : "#beab8f",
           }}
         >
-          {title.isCompleted ? "Completed" : "Pending"}
+          {title.isCompleted ? (
+            <HiOutlineClipboardCheck />
+          ) : (
+            <MdPendingActions />
+          )}
         </span>
-        <span id="category">{title.category}</span>
+
         {isEditing ? (
           <>
             <input
@@ -67,28 +79,36 @@ const List = ({
               onChange={(e) => setEditedTitle(e.target.value)}
               onBlur={handleEdit}
               autoFocus
+              style={{
+                backgroundColor: title.isCompleted ? "#c4dea4" : "#beab8f",
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleEdit();
+                }
+              }}
             />
-            {/* <button onClick={handleEdit}>✓</button>
-            <button onClick={() => setIsEditing(false)}>✗</button> */}
           </>
         ) : (
-          <span id="span-mid-long">{title.title}</span>
+          <span
+            id="span-mid-long"
+            style={{
+              backgroundColor: title.isCompleted ? "#c4dea4" : "#beab8f",
+            }}
+            onClick={checkIfEditing}
+          >
+            {title.title}
+          </span>
         )}
-        <span id="span-short">{title.createdAtDate} </span>
-        {/* <span id="span-long">Description: {title.description}</span> */}
       </div>
 
       <div className="buttons">
         <FaEdit id="edit-button" onClick={checkIfEditing} />
         |
-        <FaDeleteLeft
-          id="delete-button"
-          style={{
-            color: "#cc1e1e",
-          }}
-          onClick={handleDelete}
-        />
+        <MdDeleteForever id="delete-button" onClick={handleDelete} />
       </div>
+
+      <div className="side-list"></div>
     </div>
   );
 };

@@ -13,10 +13,12 @@ body {
 }
 
 .heading {
-  background-color: #948473;
-  font-weight: bold;
-  color: #ffff;
   flex: 5%;
+  background-color: #948473;
+  color: #ffff;
+  font-weight: bold;
+  padding: 0px;
+  margin: 0px;
 }
 
 .add-todo {
@@ -31,84 +33,57 @@ body {
 }
 
 .side {
-  width: 30%;
+  width: 10%;
   background-color: #948473;
 }
 
 .input-class {
-  width: 70%;
+  width: 90%;
   display: flex;
   flex-direction: row;
   text-align: start;
+
   word-break: break-word;
-  /*  background-color: white; */
 }
 
 .title {
-  width: 60%;
+  width: 100%;
   display: flex;
   align-items: center;
-}
 
-.title input {
-  border-radius: 7px;
-  border: 1px solid grey;
-  word-break: break-word;
-  margin: 0 15px;
-  height: 25px;
-  width: 75%;
-}
-
-.categories-options {
-  display: flex;
-  width: 20%;
-  text-align: center;
   align-items: center;
-  /* background-color: aquamarine; */
-}
-
-#options-input {
-  border-radius: 5px;
-  padding: 6px;
-  background-color: #948473;
-  border-color: transparent;
-  width: 75%;
-}
-
-.description {
-  width: 20%;
-  display: flex;
-  word-break: break-word;
-  /* background-color: #000000; */
-}
-
-/* .description label {
-  text-align: start;
   justify-content: center;
 }
 
-.description textarea {
-  height: 80%;
-  width: 70%;
-  resize: none;
-  border-radius: 7px;
+.title label {
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.title input {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border: 1px solid grey;
   word-break: break-word;
-  margin: 0 15px;
-} */
+
+  height: 25px;
+  width: 49%;
+}
 
 #add {
-  background: #b5a28e;
-  border: 1px solid black;
-  border-radius: 6px;
+  background: #948473;
+  border: 1px solid rgb(103, 102, 102);
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-  box-sizing: border-box;
+
   color: #000000;
   cursor: pointer;
   display: inline-block;
   font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
   font-size: 14px;
   line-height: 16%;
-  min-height: 30px;
+  min-height: 29px;
   outline: 0;
   text-align: center;
   text-rendering: geometricprecision;
@@ -117,6 +92,7 @@ body {
   -webkit-user-select: none;
   touch-action: manipulation;
   vertical-align: middle;
+  padding: 0 30px;
 }
 
 #add:hover,
@@ -143,22 +119,23 @@ body {
   word-break: break-word;
 }
 
-.filter-options {
+.organize {
   flex: 5%;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
 }
 
 .filter-options select {
   background-color: #948473;
-  border-radius: 6px;
+  border-radius: 5px;
   border: none;
   width: 6%;
   padding: 3px;
-  color: #fff;
-  font-size: 14px;
+  color: #000;
+  font-size: 12px;
   font-weight: bold;
+  width: 100%;
 }
 
 #options {
@@ -166,11 +143,48 @@ body {
   background-color: #b5a28e;
 }
 
-.organize {
-  flex: 5%;
-  display: flex;
-  flex-direction: row;
-  background-color: #000000;
-  align-items: center;
-  justify-content: center;
+@media only screen and (max-width: 768px) {
+  .side {
+    display: none;
+  }
+  .input-class {
+    width: 100%;
+  }
+  .title input {
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .title input {
+    width: 50%;
+  }
+  .title label {
+    font-size: 12px;
+  }
+  #add {
+    padding: 0 8px;
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 328px) {
+  .title {
+    flex-direction: column;
+  }
+  .add-todo {
+    padding: 10px 0;
+  }
+  #add {
+    width: 30%;
+    border-radius: 5px;
+    margin-top: 3px;
+  }
+  .title input {
+    width: 70%;
+    border-radius: 0px;
+  }
+  .title label {
+    display: none;
+  }
 }

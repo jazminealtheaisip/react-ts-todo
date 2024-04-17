@@ -6,15 +6,8 @@ import { v4 as uuidv4 } from "uuid";
 
 const App: FC = () => {
   const [title, setTitle] = useState<string>("");
-  /* const [description, setDescription] = useState<string>(""); */
   const [todoList, setTodoList] = useState<Data[]>([]);
-  /* const todosLength = todoList.length; */
   const [filterOption, setFilterOption] = useState<string>("all");
-
-  const [category, setCategory] = useState<string>("");
-  const [filterCategory, setFilterCategory] = useState<string>("all");
-
-  const [sortOrder, setSortOrder] = useState<string>("descending");
 
   const storedTodoList = localStorage.getItem("todoList");
 
@@ -28,26 +21,9 @@ const App: FC = () => {
     localStorage.setItem("todoList", JSON.stringify(todoList));
   }, [todoList]);
 
-  const handleUpdate = (
-    event: ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ): void => {
-    if (event.target.name === "title") {
-      setTitle(event.target.value);
-    } /* else {
-      setDescription(event.target.value);
-    } */ else if (event.target.name === "category") {
-      setCategory(event.target.value);
-    }
-  };
-
   const addTodo = (): void => {
     if (title.trim() === "") {
       alert("Title cannot be empty. Please provide a title.");
-      return;
-    } else if (category.trim() === "") {
-      alert("Please choose a category.");
       return;
     } else {
       const currentDate = new Date().toLocaleDateString();
@@ -55,15 +31,21 @@ const App: FC = () => {
       const newTodo = {
         id: uuidv4(),
         title: title,
-        /* description: description, */
         isCompleted: false,
-        category: category,
         createdAtDate: `${currentDate} ${currentTime}`,
       };
       setTodoList([...todoList, newTodo]);
       setTitle("");
-      setCategory("");
-      /* setDescription(""); */
+    }
+  };
+
+  const handleUpdate = (
+    event: ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ): void => {
+    if (event.target.name === "title") {
+      setTitle(event.target.value);
     }
   };
 
@@ -77,11 +59,6 @@ const App: FC = () => {
     setTodoList(updatedTodoList);
   };
 
-  const deleteTodo = (id: string): void => {
-    const updatedTodoList = todoList.filter((title) => title.id !== id);
-    setTodoList(updatedTodoList);
-  };
-
   const toggleCompleted = (id: string): void => {
     const updatedTodoList = todoList.map((title) => {
       if (title.id === id) {
@@ -89,6 +66,11 @@ const App: FC = () => {
       }
       return title;
     });
+    setTodoList(updatedTodoList);
+  };
+
+  const deleteTodo = (id: string): void => {
+    const updatedTodoList = todoList.filter((title) => title.id !== id);
     setTodoList(updatedTodoList);
   };
 
@@ -100,35 +82,14 @@ const App: FC = () => {
     } else if (filterOption === "pending") {
       filteredList = filteredList.filter((title) => !title.isCompleted);
     }
-
-    if (filterCategory !== "all") {
-      filteredList = filteredList.filter(
-        (title) => title.category === filterCategory
-      );
-    }
-
-    if (sortOrder === "ascending") {
-      filteredList.sort(
-        (a, b) =>
-          new Date(a.createdAtDate).getTime() -
-          new Date(b.createdAtDate).getTime()
-      );
-    } else {
-      filteredList.sort(
-        (a, b) =>
-          new Date(b.createdAtDate).getTime() -
-          new Date(a.createdAtDate).getTime()
-      );
-    }
-
     return filteredList;
   };
 
   return (
     <div className="App">
-      <header className="heading">
-        <h1>To Do List</h1>
-      </header>
+      <div className="heading">
+        <h2>To Do List</h2>
+      </div>
 
       <div className="add-todo">
         <div className="side"></div>
@@ -142,40 +103,15 @@ const App: FC = () => {
               name="title"
               value={title}
               onChange={handleUpdate}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  addTodo();
+                }
+              }}
               required
             />
-          </div>
-
-          <div className="categories-options">
-            {/*  <label>Category: </label> */}
-            <select
-              id="options-input"
-              name="category"
-              onChange={handleUpdate}
-              value={category}
-              required
-            >
-              {!category && (
-                <option value="" disabled>
-                  Select category
-                </option>
-              )}
-              <option value="Work"> Work</option>
-              <option value="School">School</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-
-          <div className="description">
-            {/* <label>Description: </label>
-            <textarea
-              placeholder="Description..."
-              name="description"
-              value={description}
-              onChange={handleUpdate}
-            /> */}
             <button id="add" onClick={addTodo}>
-              + Add Todo
+              + Todo
             </button>
           </div>
         </div>
@@ -194,25 +130,6 @@ const App: FC = () => {
             <option value="pending">Pending</option>
           </select>
         </div>
-
-        <div className="sort-options">
-          <select onChange={(e) => setSortOrder(e.target.value)} id="options">
-            <option value="descending">Latest - Oldest</option>
-            <option value="ascending">Oldest - Latest</option>
-          </select>
-        </div>
-
-        <div className="categories-filer">
-          <select
-            onChange={(e) => setFilterCategory(e.target.value)}
-            id="options"
-          >
-            <option value="all">All</option>
-            <option value="Work">Work</option>
-            <option value="School">School</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
       </div>
 
       <div className="todo-list">
@@ -223,7 +140,6 @@ const App: FC = () => {
               title={title}
               onDelete={deleteTodo}
               onToggleCompleted={toggleCompleted}
-              category={category}
               onEditTitle={handleEditTitle}
             />
           );

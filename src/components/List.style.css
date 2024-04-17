@@ -1,19 +1,25 @@
 .todo-container {
-  width: 70%;
-
+  width: 100%;
   display: flex;
   color: black;
-  margin: 4px;
 }
 
-.todo-container .todo-each {
-  flex: 90%;
+.side-list {
+  width: 30%;
+}
+
+.todo-each {
+  width: 60%;
   display: flex;
   flex-direction: row;
-  align-items: stretch;
 }
 
-.todo-container .todo-each span {
+.todo-each input[type="text"]:focus {
+  border-width: 1px;
+  background-color: #beab8f;
+}
+
+.todo-each span {
   display: flex;
   align-items: center;
   border: 1px solid white;
@@ -23,10 +29,7 @@
   background-color: #beab8f;
   word-wrap: break-word;
   text-align: start;
-}
-
-#category {
-  width: 5%;
+  margin-top: 2px;
 }
 
 #checkbox {
@@ -36,24 +39,21 @@
 }
 
 #status {
-  width: 8%;
+  width: 3%;
   display: flex;
-  justify-content: start;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  border-right: none;
 }
 
-#span-short {
-  width: 20%;
-}
 #span-mid-long {
-  width: 65%;
+  width: 100%;
+  border-left: none;
 }
-/* #span-long {
-  width: 50%;
-  word-wrap: break-word;
-} */
 
 .buttons {
-  flex: 10%;
+  width: 10%;
   border: 1px solid #fff;
   background-color: #948473;
   border-top-right-radius: 8px;
@@ -63,38 +63,87 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 2px;
 }
 
 #edit-button {
   cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
-  background-color: transparent;
+  color: #3b3b3b;
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+#edit-button:hover,
+#edit-button:active {
   color: #fff;
-}
-
-#edit-button:hover {
-  background: #484f81;
-}
-
-#edit-button:focus {
-  outline: none;
 }
 
 #delete-button {
   cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
-  background-color: transparent;
-  color: #fff;
+  color: #7b0707;
+  font-size: 20px;
+  margin-left: 5px;
 }
 
-#delete-button:hover {
-  background: #865353;
+#delete-button:hover,
+#delete-button:active {
+  color: #c40f0f;
 }
 
-#delete-button:focus {
-  outline: none;
+@media only screen and (max-width: 1000px) {
+  .side-list {
+    max-width: 0%;
+  }
+
+  .todo-each {
+    max-width: 100%;
+  }
+
+  .buttons {
+    max-width: 100%;
+  }
+  .todo-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  #span-mid-long {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .todo-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .buttons {
+    width: 80%;
+    border-radius: 0px;
+    margin: 0px;
+    border-top: none;
+  }
+  .todo-each {
+    margin-top: 5px;
+    width: 80%;
+  }
+  #edit-button {
+    font-size: 18px;
+    padding: 3px;
+  }
+  #delete-button {
+    font-size: 22px;
+    padding: 3px;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  #status {
+    width: 15%;
+    font-size: 20px;
+  }
+  #span-mid-long {
+    width: 90%;
+  }
 }
