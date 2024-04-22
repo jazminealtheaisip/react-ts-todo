@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import "./List.style.css";
-import { Data } from "../data";
+import { Types } from "../type/types";
 import { FaEdit } from "react-icons/fa";
 import { MdPendingActions } from "react-icons/md";
 import { HiOutlineClipboardCheck } from "react-icons/hi";
 import { MdDeleteForever } from "react-icons/md";
+import { toast } from "sonner";
 
 interface TodoInterface {
-  title: Data;
+  title: Types;
   onDelete: (id: string) => void;
   onToggleCompleted: (id: string) => void;
   onEditTitle: (id: string, newTitle: string) => void;
@@ -33,6 +34,7 @@ const List = ({
   const handleEdit = (): void => {
     onEditTitle(title.id, editedTitle);
     setIsEditing(false);
+    toast.success("Saved");
   };
 
   const checkIfEditing = (): void => {

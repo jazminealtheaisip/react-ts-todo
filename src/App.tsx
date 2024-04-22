@@ -1,12 +1,14 @@
 import React, { ChangeEvent, FC, useState, useEffect } from "react";
 import "./App.css";
-import { Data } from "./data";
 import List from "./components/List";
+import { Types } from "./type/types";
 import { v4 as uuidv4 } from "uuid";
+import { Toaster, toast } from "sonner";
+import FilteredList from "./features/FilteredList";
 
 const App: FC = () => {
   const [title, setTitle] = useState<string>("");
-  const [todoList, setTodoList] = useState<Data[]>([]);
+  const [todoList, setTodoList] = useState<Types[]>([]);
   const [filterOption, setFilterOption] = useState<string>("all");
 
   const storedTodoList = localStorage.getItem("todoList");
@@ -23,7 +25,7 @@ const App: FC = () => {
 
   const addTodo = (): void => {
     if (title.trim() === "") {
-      alert("Title cannot be empty. Please provide a title.");
+      toast.error("Title cannot be empty. Please provide a Task Name.");
       return;
     } else {
       const currentDate = new Date().toLocaleDateString();
@@ -36,14 +38,11 @@ const App: FC = () => {
       };
       setTodoList([...todoList, newTodo]);
       setTitle("");
+      toast.success("New todo added!");
     }
   };
 
-  const handleUpdate = (
-    event: ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ): void => {
+  const handleUpdate = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.name === "title") {
       setTitle(event.target.value);
     }
@@ -72,9 +71,10 @@ const App: FC = () => {
   const deleteTodo = (id: string): void => {
     const updatedTodoList = todoList.filter((title) => title.id !== id);
     setTodoList(updatedTodoList);
+    toast.success("Deleted!");
   };
 
-  const filterTodoList = () => {
+  /* const filterTodoList = () => {
     let filteredList = todoList;
 
     if (filterOption === "completed") {
@@ -83,14 +83,15 @@ const App: FC = () => {
       filteredList = filteredList.filter((title) => !title.isCompleted);
     }
     return filteredList;
-  };
+  }; */
 
   return (
     <div className="App">
       <div className="heading">
         <h2>To Do List</h2>
       </div>
-
+      {/* <LocalStorage title={todoList} setTodos={setTodoList} /> */}
+      <Toaster position="bottom-center" />
       <div className="add-todo">
         <div className="side"></div>
 
@@ -131,9 +132,15 @@ const App: FC = () => {
           </select>
         </div>
       </div>
-
-      <div className="todo-list">
-        {filterTodoList().map((title: Data, id: number) => {
+      <FilteredList
+        title={todoList}
+        onDelete={deleteTodo}
+        onToggleCompleted={toggleCompleted}
+        onEditTitle={handleEditTitle}
+        filterOption={filterOption}
+      />
+      {/* <div className="todo-list">
+        {filterTodoList().map((title: Types, id: number) => {
           return (
             <List
               key={id}
@@ -144,7 +151,7 @@ const App: FC = () => {
             />
           );
         })}
-      </div>
+      </div> */}
     </div>
   );
 };
