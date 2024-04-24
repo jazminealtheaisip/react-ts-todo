@@ -3,4 +3,5 @@ export interface Types {
   title: string;
   isCompleted: boolean;
   createdAtDate: string;
+  category: string;
 }

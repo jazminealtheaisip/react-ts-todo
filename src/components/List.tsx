@@ -1,51 +1,56 @@
-import React, { useState } from "react";
-import "./List.style.css";
-import { Types } from "../type/types";
+import React from "react";
+import "../css/List.style.css";
 import { FaEdit } from "react-icons/fa";
 import { MdPendingActions } from "react-icons/md";
 import { HiOutlineClipboardCheck } from "react-icons/hi";
 import { MdDeleteForever } from "react-icons/md";
-import { toast } from "sonner";
-
-interface TodoInterface {
-  title: Types;
-  onDelete: (id: string) => void;
-  onToggleCompleted: (id: string) => void;
-  onEditTitle: (id: string, newTitle: string) => void;
-}
+import { ListTypes } from "../list interface/ListTypes";
+import { MdDragIndicator } from "react-icons/md";
+import { MdWork, MdSchool, MdOtherHouses } from "react-icons/md";
+import { useManageList } from "./manageList";
 
 const List = ({
   title,
   onDelete,
   onToggleCompleted,
   onEditTitle,
-}: TodoInterface) => {
-  const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [editedTitle, setEditedTitle] = useState<string>("");
-
-  const handleDelete = (): void => {
-    onDelete(title.id);
-  };
-
-  const handleToggleCompleted = (): void => {
-    onToggleCompleted(title.id);
-  };
-
-  const handleEdit = (): void => {
-    onEditTitle(title.id, editedTitle);
-    setIsEditing(false);
-    toast.success("Saved");
-  };
-
-  const checkIfEditing = (): void => {
-    setIsEditing(true);
-    setEditedTitle(title.title);
-  };
+}: ListTypes) => {
+  const {
+    isEditing,
+    editedTitle,
+    setEditedTitle,
+    handleToggleCompleted,
+    handleDelete,
+    handleEdit,
+    checkIfEditing,
+  } = useManageList({
+    title,
+    category: title.category,
+    onDelete,
+    onToggleCompleted,
+    onEditTitle,
+  });
 
   return (
     <div className="todo-container">
       <div className="side-list"></div>
       <div className="todo-each">
+        <span id="drag">
+          <MdDragIndicator />
+        </span>
+
+        <span
+          style={{
+            backgroundColor: title.isCompleted ? "#c4dea4" : "#b5a28d",
+          }}
+          id="category"
+        >
+          {/* {title.category} */}
+          {title.category === "Work" && <MdWork color="#912a2d" />}
+          {title.category === "School" && <MdSchool color="#052c49" />}
+          {title.category === "Other" && <MdOtherHouses color="#357d77" />}
+        </span>
+
         <span
           id="checkbox"
           style={{

@@ -32,6 +32,10 @@
   margin-top: 2px;
 }
 
+#drag {
+  background-color: #948473;
+}
+
 #checkbox {
   width: 2%;
   display: flex;
@@ -50,6 +54,11 @@
 #span-mid-long {
   width: 100%;
   border-left: none;
+}
+
+#category {
+  font-size: 18px;
+  background-color: #b5a28d;
 }
 
 .buttons {

@@ -65,24 +65,21 @@ body {
   border-bottom-left-radius: 5px;
   border: 1px solid grey;
   word-break: break-word;
-
   height: 25px;
-  width: 49%;
+  width: 35%;
 }
 
 #add {
-  background: #948473;
+  background: #d7cfc5;
   border: 1px solid rgb(103, 102, 102);
-  border-bottom-right-radius: 5px;
-  border-top-right-radius: 5px;
+  border-radius: 5px;
+  /* border-top-right-radius: 5px; */
   box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
-
   color: #000000;
   cursor: pointer;
   display: inline-block;
   font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
   font-size: 14px;
-  line-height: 16%;
   min-height: 29px;
   outline: 0;
   text-align: center;
@@ -92,7 +89,8 @@ body {
   -webkit-user-select: none;
   touch-action: manipulation;
   vertical-align: middle;
-  padding: 0 30px;
+  padding: 0 20px;
+  margin: 0 0 0 20px;
 }
 
 #add:hover,
@@ -126,11 +124,11 @@ body {
   justify-content: center;
 }
 
-.filter-options select {
+.filter-options select,
+.categories-filter select {
   background-color: #948473;
   border-radius: 5px;
   border: none;
-  width: 6%;
   padding: 3px;
   color: #000;
   font-size: 12px;
@@ -138,9 +136,20 @@ body {
   width: 100%;
 }
 
-#options {
+#options,
+#options-category {
   text-align: center;
   background-color: #b5a28e;
+}
+
+.categories-options select {
+  background-color: #d7cfc5;
+  min-height: 29px;
+  width: 95px;
+  padding: 0 10px;
+  font-size: 12px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 @media only screen and (max-width: 768px) {

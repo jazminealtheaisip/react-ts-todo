@@ -1,96 +1,30 @@
-import React, { ChangeEvent, FC, useState, useEffect } from "react";
-import "./App.css";
+import React, { FC } from "react";
+import "./css/App.css";
 import List from "./components/List";
 import { Types } from "./type/types";
-import { v4 as uuidv4 } from "uuid";
-import { Toaster, toast } from "sonner";
-import FilteredList from "./features/FilteredList";
+import { Toaster } from "sonner";
+import { useManageTodo } from "./components/manageTodo";
 
 const App: FC = () => {
-  const [title, setTitle] = useState<string>("");
-  const [todoList, setTodoList] = useState<Types[]>([]);
-  const [filterOption, setFilterOption] = useState<string>("all");
-
-  const storedTodoList = localStorage.getItem("todoList");
-
-  useEffect(() => {
-    if (storedTodoList) {
-      setTodoList(JSON.parse(storedTodoList));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("todoList", JSON.stringify(todoList));
-  }, [todoList]);
-
-  const addTodo = (): void => {
-    if (title.trim() === "") {
-      toast.error("Title cannot be empty. Please provide a Task Name.");
-      return;
-    } else {
-      const currentDate = new Date().toLocaleDateString();
-      const currentTime = new Date().toLocaleTimeString();
-      const newTodo = {
-        id: uuidv4(),
-        title: title,
-        isCompleted: false,
-        createdAtDate: `${currentDate} ${currentTime}`,
-      };
-      setTodoList([...todoList, newTodo]);
-      setTitle("");
-      toast.success("New todo added!");
-    }
-  };
-
-  const handleUpdate = (event: ChangeEvent<HTMLInputElement>): void => {
-    if (event.target.name === "title") {
-      setTitle(event.target.value);
-    }
-  };
-
-  const handleEditTitle = (id: string, newTitle: string): void => {
-    const updatedTodoList = todoList.map((title) => {
-      if (title.id === id) {
-        return { ...title, title: newTitle };
-      }
-      return title;
-    });
-    setTodoList(updatedTodoList);
-  };
-
-  const toggleCompleted = (id: string): void => {
-    const updatedTodoList = todoList.map((title) => {
-      if (title.id === id) {
-        return { ...title, isCompleted: !title.isCompleted };
-      }
-      return title;
-    });
-    setTodoList(updatedTodoList);
-  };
-
-  const deleteTodo = (id: string): void => {
-    const updatedTodoList = todoList.filter((title) => title.id !== id);
-    setTodoList(updatedTodoList);
-    toast.success("Deleted!");
-  };
-
-  /* const filterTodoList = () => {
-    let filteredList = todoList;
-
-    if (filterOption === "completed") {
-      filteredList = filteredList.filter((title) => title.isCompleted);
-    } else if (filterOption === "pending") {
-      filteredList = filteredList.filter((title) => !title.isCompleted);
-    }
-    return filteredList;
-  }; */
+  const {
+    inputRef,
+    category,
+    setFilterCategory,
+    setFilterOption,
+    addTodo,
+    handleEditTitle,
+    toggleCompleted,
+    deleteTodo,
+    filterTodoList,
+    setCategory,
+  } = useManageTodo();
 
   return (
     <div className="App">
       <div className="heading">
         <h2>To Do List</h2>
       </div>
-      {/* <LocalStorage title={todoList} setTodos={setTodoList} /> */}
+
       <Toaster position="bottom-center" />
       <div className="add-todo">
         <div className="side"></div>
@@ -99,11 +33,11 @@ const App: FC = () => {
           <div className="title">
             <label>Task Name: </label>
             <input
+              ref={inputRef}
               type="text"
               placeholder="Enter Task Name..."
               name="title"
-              value={title}
-              onChange={handleUpdate}
+              /*  onChange={handleUpdate} */
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   addTodo();
@@ -111,6 +45,31 @@ const App: FC = () => {
               }}
               required
             />
+            <div />
+
+            <div className="categories-options">
+              <select
+                id="options-input"
+                name="category"
+                onChange={(e) => setCategory(e.target.value)}
+                value={category}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    addTodo();
+                  }
+                }}
+                required
+              >
+                {!category && (
+                  <option value="" disabled>
+                    Category
+                  </option>
+                )}
+                <option value="Work"> Work</option>
+                <option value="School">School</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
             <button id="add" onClick={addTodo}>
               + Todo
             </button>
@@ -131,15 +90,20 @@ const App: FC = () => {
             <option value="pending">Pending</option>
           </select>
         </div>
+        <div className="categories-filter">
+          <select
+            onChange={(e) => setFilterCategory(e.target.value)}
+            id="options-category"
+          >
+            <option value="all">All</option>
+            <option value="Work">Work</option>
+            <option value="School">School</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
       </div>
-      <FilteredList
-        title={todoList}
-        onDelete={deleteTodo}
-        onToggleCompleted={toggleCompleted}
-        onEditTitle={handleEditTitle}
-        filterOption={filterOption}
-      />
-      {/* <div className="todo-list">
+
+      <div className="todo-list">
         {filterTodoList().map((title: Types, id: number) => {
           return (
             <List
@@ -148,10 +112,11 @@ const App: FC = () => {
               onDelete={deleteTodo}
               onToggleCompleted={toggleCompleted}
               onEditTitle={handleEditTitle}
+              category={category}
             />
           );
         })}
-      </div> */}
+      </div>
     </div>
   );
 };
