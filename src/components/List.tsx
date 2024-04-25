@@ -4,10 +4,10 @@ import { FaEdit } from "react-icons/fa";
 import { MdPendingActions } from "react-icons/md";
 import { HiOutlineClipboardCheck } from "react-icons/hi";
 import { MdDeleteForever } from "react-icons/md";
-import { ListTypes } from "../list interface/ListTypes";
+import { ListTypes } from "../type/ListTypes";
 import { MdDragIndicator } from "react-icons/md";
 import { MdWork, MdSchool, MdOtherHouses } from "react-icons/md";
-import { useManageList } from "./manageList";
+import { useManageList } from "../hooks/manageList";
 
 const List = ({
   title,

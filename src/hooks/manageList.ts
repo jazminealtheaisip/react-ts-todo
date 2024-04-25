@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "../css/List.style.css";
 import { toast } from "sonner";
-import { ListTypes } from "../list interface/ListTypes";
+import { ListTypes } from "../type/ListTypes";
 
 export const useManageList = ({
   title,

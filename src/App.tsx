@@ -3,7 +3,7 @@ import "./css/App.css";
 import List from "./components/List";
 import { Types } from "./type/types";
 import { Toaster } from "sonner";
-import { useManageTodo } from "./components/manageTodo";
+import { useManageTodo } from "./hooks/manageTodo";
 
 const App: FC = () => {
   const {
@@ -37,7 +37,6 @@ const App: FC = () => {
               type="text"
               placeholder="Enter Task Name..."
               name="title"
-              /*  onChange={handleUpdate} */
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   addTodo();
@@ -90,6 +89,7 @@ const App: FC = () => {
             <option value="pending">Pending</option>
           </select>
         </div>
+
         <div className="categories-filter">
           <select
             onChange={(e) => setFilterCategory(e.target.value)}

@@ -1,4 +1,4 @@
-import { Types } from "../type/types";
+import { Types } from "./types";
 
 export interface ListTypes {
   title: Types;
