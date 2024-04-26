@@ -1,20 +1,24 @@
 import React from "react";
 import "../css/List.style.css";
 import { FaEdit } from "react-icons/fa";
-import { MdPendingActions } from "react-icons/md";
 import { HiOutlineClipboardCheck } from "react-icons/hi";
-import { MdDeleteForever } from "react-icons/md";
+import {
+  MdWork,
+  MdSchool,
+  MdOtherHouses,
+  MdDragIndicator,
+  MdDeleteForever,
+  MdPendingActions,
+} from "react-icons/md";
 import { ListTypes } from "../type/ListTypes";
-import { MdDragIndicator } from "react-icons/md";
-import { MdWork, MdSchool, MdOtherHouses } from "react-icons/md";
-import { useManageList } from "../hooks/manageList";
+import { useManageList } from "../functions/manageList";
 
 const List = ({
   title,
   onDelete,
   onToggleCompleted,
   onEditTitle,
-}: ListTypes) => {
+}: ListTypes & { index: number }) => {
   const {
     isEditing,
     editedTitle,

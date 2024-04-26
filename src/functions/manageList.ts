@@ -2,6 +2,7 @@ import { useState } from "react";
 import "../css/List.style.css";
 import { toast } from "sonner";
 import { ListTypes } from "../type/ListTypes";
+import { useListStore } from "../store/listStore";
 
 export const useManageList = ({
   title,
@@ -9,8 +10,8 @@ export const useManageList = ({
   onToggleCompleted,
   onEditTitle,
 }: ListTypes) => {
+  const { editedTitle, setEditedTitle } = useListStore();
   const [isEditing, setIsEditing] = useState(false);
-  const [editedTitle, setEditedTitle] = useState(title.title);
 
   const handleToggleCompleted = () => {
     onToggleCompleted(title.id);

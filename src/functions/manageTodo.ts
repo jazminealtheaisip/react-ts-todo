@@ -1,31 +1,16 @@
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "sonner";
-import { Types } from "../type/types";
+import { useLocalStorage } from "../components/localStorage";
+import { useFilterStore } from "../store/filterStore";
 import { useTodoStore } from "../store/todoStore";
 
 export const useManageTodo = () => {
-  const [todoList, setTodoList] = useState<Types[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [category, setCategory] = useState<string>("");
-
+  const { todoList, setTodoList, category, setCategory } = useTodoStore();
   const { filterOption, filterCategory, setFilterOption, setFilterCategory } =
-    useTodoStore();
-  /* const [filterCategory, setFilterCategory] = useState<string>("all"); */
-  /*  const [filterOption, setFilterOption] = useState<string>("all"); */
-
-  const storedTodoList = localStorage.getItem("todoList");
-
-  useEffect(() => {
-    if (storedTodoList) {
-      setTodoList(JSON.parse(storedTodoList));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("todoList", JSON.stringify(todoList));
-  }, [todoList]);
+    useFilterStore();
+  const { storedTodoList } = useLocalStorage();
 
   const addTodo = (): void => {
     const title = inputRef.current?.value.trim();
@@ -112,7 +97,5 @@ export const useManageTodo = () => {
     toggleCompleted,
     deleteTodo,
     filterTodoList,
-
-    /*  handleUpdate, */
   };
 };

@@ -3,21 +3,22 @@ import "./css/App.css";
 import List from "./components/List";
 import { Types } from "./type/types";
 import { Toaster } from "sonner";
-import { useManageTodo } from "./hooks/manageTodo";
+import { useManageTodo } from "./functions/manageTodo";
+import { useFilterStore } from "./store/filterStore";
+import { useTodoStore } from "./store/todoStore";
 
 const App: FC = () => {
   const {
     inputRef,
-    category,
-    setFilterCategory,
-    setFilterOption,
     addTodo,
     handleEditTitle,
     toggleCompleted,
     deleteTodo,
     filterTodoList,
-    setCategory,
   } = useManageTodo();
+
+  const { category, setCategory } = useTodoStore();
+  const { setFilterOption, setFilterCategory } = useFilterStore();
 
   return (
     <div className="App">
@@ -113,6 +114,7 @@ const App: FC = () => {
               onToggleCompleted={toggleCompleted}
               onEditTitle={handleEditTitle}
               category={category}
+              index={id}
             />
           );
         })}
